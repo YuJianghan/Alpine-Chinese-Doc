@@ -8,7 +8,9 @@
 
 官方文档：
 
-[Start Here — Alpine.js](https://alpinejs.dev/start-here)
+[Start Here — Alpine.js](https://alpinejs.dev/start-here)  
+
+[Notion](https://yujianghan.notion.site/Alpine-js-ccd439e6d8b14b84922097172b53bf04)
 
 # 安装
 
