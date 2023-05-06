@@ -1,0 +1,724 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>双向绑定: x-model</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9672f919-b6cd-45b1-af0d-4db9a3a2276f" class="page sans"><header><h1 class="page-title">双向绑定: x-model</h1></header><div class="page-body"><hr id="afd7dd32-6229-44e4-8a15-5d1474b4c2d1"/><p id="fd25554e-a2a5-4c82-8ba9-975562117ff4" class="">你可以使用<code><strong>x-model</strong></code>指令将 input 元素的值绑定到 Alpine 数据。</p><p id="4ab425b7-e58c-4d4f-a598-b85156b745a0" class="">这里有一个简单的例子，使用<code><strong>x-model</strong></code>将文本框里输入的值绑定到 Alpine 数据的属性里。</p><pre id="8106f67a-d910-455b-9f77-a9a8eace3d02" class="code"><code>&lt;div x-data=&quot;{ message: &#x27;&#x27; }&quot;&gt;
+    &lt;input type=&quot;text&quot; x-model=&quot;message&quot;&gt;
+    &lt;span x-text=&quot;message&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre><p id="cb3badc1-5e3f-416e-a640-adfc13ad9c82" class="">现在，当用户在文本框里输入时，<code><strong>message</strong></code>将同时显示在<code><strong>&lt;span&gt;</strong></code>标记中。</p><p id="a199d5a2-235b-477a-8cd0-3b3588f2841a" class=""><code><strong>x-model</strong></code>是双向绑定，意味着它既能“更改”又能“获取”。除了能通过 input 元素更改数据之外，如果数据本身发生更改，则元素也会跟着改变。</p><p id="47d496dd-7783-4210-8e2c-114254e49259" class="">我们可以使用与上面类似的示例，并添加一个按钮来更改<code><strong>message</strong></code>属性的值。</p><pre id="a9ae771a-b1e9-43ff-a3a6-4716f77d8d6e" class="code"><code>&lt;div x-data=&quot;{ message: &#x27;&#x27; }&quot;&gt;
+    &lt;input type=&quot;text&quot; x-model=&quot;message&quot;&gt;
+    &lt;span x-text=&quot;message&quot;&gt;&lt;/span&gt;
+    &lt;button x-on:click=&quot;message = &#x27;已更改&#x27;&quot;&gt;更改信息&lt;/button&gt;
+&lt;/div&gt;</code></pre><p id="b263f07d-11e6-4741-bed1-0ae9b1afed4f" class="">现在，当单击<code><strong>&lt;button&gt;</strong></code>时，span 元素和 input 元素的值将立即更新为“已更改”。</p><p id="5bae18d5-67a1-4277-ae8e-d25023a2d6d0" class=""><code><strong>x-model</strong></code>指令可以使用以下的 input 元素：</p><ul id="486276b9-66d4-4089-b038-a519522e0d38" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;input type=&quot;text&quot;&gt;</strong></code></li></ul><ul id="1aad3873-10c4-497c-8e01-b84adf0d184c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;textarea&gt;</strong></code></li></ul><ul id="bea0a8a6-feac-40f7-b268-8033adabfd9a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;input type=&quot;checkbox&quot;&gt;</strong></code></li></ul><ul id="de6fc09f-12a5-449d-9ba5-0d8e540ee0df" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;input type=&quot;radio&quot;&gt;</strong></code></li></ul><ul id="e9a705ec-5bed-40fc-8f04-0ec10c63dd48" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;select&gt;</strong></code></li></ul><h1 id="4f02cdc2-0865-4192-8c56-647302069bbc" class="">文本输入</h1><hr id="29b3ad19-b9a9-46cf-857e-9d86d96623d2"/><pre id="ce98de57-1aef-43cc-b676-db3dade84bec" class="code"><code>&lt;input type=&quot;text&quot; x-model=&quot;message&quot;&gt;
+ 
+&lt;span x-text=&quot;message&quot;&gt;&lt;/span&gt;</code></pre><h1 id="e388f51a-9840-4ff3-bc95-4042f879cb78" class="">文本区域输入</h1><hr id="0731382e-9dd1-45f8-b52e-ebd4b484fd05"/><pre id="182e7b4f-a717-470d-a6a4-a4ea28fd7b17" class="code"><code>&lt;textarea x-model=&quot;message&quot;&gt;&lt;/textarea&gt;
+ 
+&lt;span x-text=&quot;message&quot;&gt;&lt;/span&gt;</code></pre><h1 id="e2a9cfb4-a64d-4670-a6cb-595896771c59" class="">复选按钮输入</h1><hr id="868176da-6b82-4b54-b217-3d16ddcc4a15"/><h2 id="18f77072-fd8b-420b-bcad-682214bfaabb" class="">带有布尔值的单个复选框</h2><pre id="4f785130-3f04-49fd-9dae-581af5ce155d" class="code"><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; x-model=&quot;show&quot;&gt;
+ 
+&lt;label for=&quot;checkbox&quot; x-text=&quot;show&quot;&gt;&lt;/label&gt;</code></pre><h2 id="f8f0ca90-0491-4334-a429-22cdb9158a5c" class="">绑定到同一数组的多个复选按钮</h2><pre id="f3a92b8f-5932-4648-b585-b87cda56690c" class="code"><code>&lt;input type=&quot;checkbox&quot; value=&quot;红&quot; x-model=&quot;colors&quot;&gt;
+&lt;input type=&quot;checkbox&quot; value=&quot;橙&quot; x-model=&quot;colors&quot;&gt;
+&lt;input type=&quot;checkbox&quot; value=&quot;黄&quot; x-model=&quot;colors&quot;&gt;
+ 
+颜色：&lt;span x-text=&quot;colors&quot;&gt;&lt;/span&gt;</code></pre><h1 id="8c05d468-e961-464f-bd3c-52bd09d10e1f" class="">单选按钮输入</h1><hr id="5d44976c-1faf-47f2-b46c-a137fc255f77"/><pre id="3bc98bcf-dbdb-4a43-8da2-80efed84a68c" class="code"><code>&lt;input type=&quot;radio&quot; value=&quot;是&quot; x-model=&quot;answer&quot;&gt;
+&lt;input type=&quot;radio&quot; value=&quot;否&quot; x-model=&quot;answer&quot;&gt;
+ 
+回答：&lt;span x-text=&quot;answer&quot;&gt;&lt;/span&gt;</code></pre><h1 id="813394da-187d-4283-b1ce-7a1f0a058e9a" class="">下拉列表输入</h1><hr id="a7686520-5445-4bdf-9b39-4757edcd1c64"/><h2 id="caa27714-afc3-48de-8020-b847e4d8a5f0" class="">单选</h2><pre id="a839b2cc-51d8-4262-8fab-3bcf8fe48f32" class="code"><code>&lt;select x-model=&quot;color&quot;&gt;
+    &lt;option&gt;红&lt;/option&gt;
+    &lt;option&gt;橙&lt;/option&gt;
+    &lt;option&gt;黄&lt;/option&gt;
+&lt;/select&gt;
+ 
+颜色：&lt;span x-text=&quot;color&quot;&gt;&lt;/span&gt;</code></pre><h2 id="b1507c73-c13c-4d2b-8d8e-22338456f0ee" class="">带有占位符的单选</h2><pre id="702e2f5b-c5f2-4522-9f1b-3652b557dbe4" class="code"><code>&lt;select x-model=&quot;color&quot;&gt;
+    &lt;option value=&quot;&quot; disabled&gt;选择一个颜色&lt;/option&gt;
+    &lt;option&gt;红&lt;/option&gt;
+    &lt;option&gt;橙&lt;/option&gt;
+    &lt;option&gt;黄&lt;/option&gt;
+&lt;/select&gt;
+ 
+颜色：&lt;span x-text=&quot;color&quot;&gt;&lt;/span&gt;</code></pre><h2 id="99bcd76d-98ae-46db-b197-5f5204873b40" class="">多选</h2><pre id="4f111337-1e0e-4a09-a8b4-80d601c0a1b2" class="code"><code>&lt;select x-model=&quot;color&quot; multiple&gt;
+    &lt;option&gt;红&lt;/option&gt;
+    &lt;option&gt;橙&lt;/option&gt;
+    &lt;option&gt;黄&lt;/option&gt;
+&lt;/select&gt;
+ 
+颜色：&lt;span x-text=&quot;color&quot;&gt;&lt;/span&gt;</code></pre><h2 id="0ff06ba8-e2c5-4ec0-b524-c3dd2b011c60" class="">使用模板语法的动态列表</h2><pre id="b76a3e23-cd24-43d7-800b-43010dcb2ff7" class="code"><code>&lt;select x-model=&quot;color&quot;&gt;
+    &lt;template x-for=&quot;color in [&#x27;红&#x27;, &#x27;橙&#x27;, &#x27;黄&#x27;]&quot;&gt;
+        &lt;option x-text=&quot;color&quot;&gt;&lt;/option&gt;
+    &lt;/template&gt;
+&lt;/select&gt;
+ 
+颜色：&lt;span x-text=&quot;color&quot;&gt;&lt;/span&gt;</code></pre><h1 id="f0dc691c-dee4-4497-b3cf-57101426fc97" class="">修饰符</h1><hr id="a5eb7877-92cc-4463-809a-346b32a5a0db"/><h2 id="ea96f5f9-e73c-4d61-a4ad-2e242c024e5a" class="">.lazy</h2><p id="5f7ba340-2308-43ee-97ae-d5f8b2fb1fb6" class="">默认情况下，当用户在 input 元素中输入文本时，<code><strong>x-model</strong></code>指令会在每次按键时更新数据。通过添加<code><strong>.lazy</strong></code>修饰符，你可以强制<code><strong>x-model</strong></code>仅在用户输入焦点远离 input 元素时更新数据。</p><p id="ad96d62d-26d4-406e-a840-56574e6e1c8d" class="">对于需要验证表单的输入是否符合要求时，<code><strong>.lazy</strong></code>修饰符会起到它的作用。因为在这种情况下，用户离开表单输入焦点之前，你并不希望它显示输入的格式错误。</p><pre id="a7b219f5-b59e-4d4b-98fa-fa3a82d7bc66" class="code"><code>&lt;input type=&quot;text&quot; x-model.lazy=&quot;username&quot;&gt;
+&lt;span x-show=&quot;username.length &gt; 20&quot;&gt;用户名必须小于20个字符长度。&lt;/span&gt;</code></pre><h2 id="46a9fff6-ff5b-4811-a16a-4d6a3b7236a2" class="">.number</h2><p id="81e5ac53-1738-445b-8c9a-0099394285ed" class="">默认情况下，通过<code><strong>x-model</strong></code>指令获取的 input 元素的输入都是字符串类型。如果你想要强制它获取的类型转换为数值型，可以添加<code><strong>.number</strong></code>修饰符。</p><pre id="3ea22b2f-c51f-49a5-9990-b2c2b3bce3e6" class="code"><code>&lt;input type=&quot;text&quot; x-model.number=&quot;age&quot;&gt;
+&lt;span x-text=&quot;typeof age&quot;&gt;&lt;/span&gt;</code></pre><h2 id="c2ec7652-9435-48a4-9800-54bfddf45f6b" class="">.debounce</h2><p id="5c703aeb-7c5a-4c05-afb0-bda03407922c" class="">通过将<code><strong>.debounce</strong></code>修饰符添加到<code><strong>x-model</strong></code>指令，你可以消除双向绑定输入时更新的抖动。</p><p id="059f926d-738f-4bd5-b14d-a8d52509504d" class="">这对于需要实时搜索输入的内容时很有用，因为每当输入的内容更改时，都会重新从服务器请求数据，增加防抖动可以让请求不那么频繁，它会在输入时停留指定时间后才会执行更新，当你连续不停地输入时是不会更新到数据中的。</p><pre id="fdf60923-1554-4253-ae9d-872d0585c357" class="code"><code>&lt;input type=&quot;text&quot; x-model.debounce=&quot;search&quot;&gt;</code></pre><p id="d6091c5c-39e4-4c7c-a98d-321fc3e95483" class="">默认的防抖动时间是250毫秒，你也可以添加一个时间修饰符来自定义防抖动时间。</p><pre id="b7d68764-af22-4037-9ec3-e543b5b01702" class="code"><code>&lt;input type=&quot;text&quot; x-model.debounce.500ms=&quot;search&quot;&gt;</code></pre><h2 id="99fa7d2c-8abc-4765-a2a3-356b46c6e4bd" class="">.throttle</h2><p id="c0f76384-9ad3-490a-99b4-c59da2876c4f" class=""><code><strong>.throttle</strong></code>修饰符与<code><strong>.debounce</strong></code>类似，你可以将<code><strong>x-model</strong></code>触发的属性更新限制为在指定的时间间隔内仅执行一次更新。</p><p id="e611dc57-8201-4408-8ab5-05ce07f665a7" class="">默认的节流时间是250毫秒，你可以添加一个时间修饰符来自定义它，如下所示。</p><pre id="1b00c53a-df68-46de-b5c0-4df018c09bd5" class="code"><code>&lt;input type=&quot;text&quot; x-model.throttle.500ms=&quot;search&quot;&gt;</code></pre><h2 id="511cc383-686a-41aa-9953-2f837eb7c14e" class="">.fill</h2><p id="5d00a2fe-04ab-4f66-81f7-9d5d45068d3f" class="">默认情况下，如果 input 元素有 value 属性，则 Alpine 会忽略该属性，仅使用<code><strong>x-model</strong></code>将输入的值设置为属性双向绑定的值。</p><p id="cbc001fd-b4ac-4ad8-9a80-56bfc299b5cc" class="">但是如果一开始没有输入，那么你可以通过添加<code><strong>.fill</strong></code>修饰符，使用 input 元素的 value 属性来设置双向绑定的值。</p><h1 id="9738e37f-81c9-484b-aef6-c9f9b790ab63" class="">访问属性的底层行为</h1><hr id="2b2303a7-e97c-4216-9b61-7c5c889b5cd3"/><p id="8d1d6559-b3b2-4446-a669-5d7ab44b257e" class="">Alpine 公开了用于获取和设置<code><strong>x-model</strong></code>绑定的属性的底层行为。这对于复杂的 Alpine 程序来说非常有用，比如你可能想要覆盖默认的<strong><code>x-model</code></strong>指令的行为，或者你想在非 input 元素上使用<code><strong>x-model</strong></code>指令。</p><p id="f1594f3f-2003-4f85-9ba2-f9a0181a233f" class="">你可以通过对使用了<strong><code>x-model</code></strong>指令的元素使用<code><strong>_x_model</strong></code>属性来获取和设置绑定的属性。<code><strong>_x_model</strong></code>有两个行为来获取和设置绑定属性的值：</p><ul id="38c9636f-de2d-407a-b915-547c95aa28e4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>el._x_model.get()</strong></code>（获取绑定属性的值）</li></ul><ul id="4f22bd0d-5e74-4b3d-ba80-f1adffda35a5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>el._x_model.set()</strong></code>（设置绑定属性的值）</li></ul><pre id="ff541532-a5f6-4b7e-b053-52a7f4a9a767" class="code"><code>&lt;div x-data=&quot;{ username: &#x27;丁一&#x27; }&quot;&gt;
+    &lt;div x-ref=&quot;div&quot; x-model=&quot;username&quot;&gt;&lt;/div&gt;
+ 
+    &lt;button @click=&quot;$refs.div._x_model.set(&#x27;丁仪&#x27;)&quot;&gt;
+        用户名更改为：“丁仪”
+    &lt;/button&gt;
+ 
+    &lt;span x-text=&quot;$refs.div._x_model.get()&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></div></article></body></html>

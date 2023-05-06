@@ -1,0 +1,731 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>绑定: x-bind</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6e9ad8b7-f4ec-46b4-a6f7-0cd0a0a72f43" class="page sans"><header><h1 class="page-title">绑定: x-bind</h1></header><div class="page-body"><hr id="14125796-94a3-4c91-aa51-f975cd371a10"/><p id="e559bc84-74ee-4238-b4ad-1c603d540ecf" class="">使用<code><strong>x-bind</strong></code>指令可以将数据绑定到元素属性的属性值上。</p><p id="3634c316-525c-4400-baef-a8bcfb1ee47d" class="">例如下面的输入框组件，使用<code><strong>x-bind</strong></code>指令将数据绑定到输入框的占位符属性上。</p><pre id="ad06d376-874f-4fe4-9f7d-cd37f20980f9" class="code"><code>&lt;div x-data=&quot;{ placeholder: &#x27;请在此处输入...&#x27; }&quot;&gt;
+    &lt;input type=&quot;text&quot; x-bind:placeholder=&quot;placeholder&quot;&gt;
+&lt;/div&gt;</code></pre><h1 id="f1456d01-b4d4-4379-882c-743c794400ac" class="">简写语法</h1><hr id="dd4ceb53-609d-40b0-9b5c-6e0c65214b4b"/><p id="9e3a6b41-3f45-461f-8e09-05c7236b8b4c" class="">如果你觉得<code><strong>x-bind:</strong></code>这种写法过于冗长，你也可以使用简写：<code><strong>:</strong></code>。例如，下面的示例中输入框的作用与上面相同，只是使用了简写语法。</p><pre id="9776e593-389c-4782-90d0-47b89c5756bc" class="code"><code>&lt;input type=&quot;text&quot; :placeholder=&quot;placeholder&quot;&gt;</code></pre><h1 id="14b6e23a-5a1e-4c8f-a023-93f8e41503ea" class="">绑定到 class 属性</h1><hr id="c60972f8-5e52-4137-a29f-c6c0c1c2d421"/><p id="0b8a833a-adee-43d3-a4dc-d84faf92bad9" class=""><code><strong>x-bind</strong></code>指令更常见的用法是给元素的 class 属性绑定不同的属性值来控制样式的改变。</p><p id="ecca48a3-6be5-4711-a7e1-efe7877d257a" class="">下面的示例中，同样实现了一个下拉组件，但是并没有使用<code><strong>x-show</strong></code>指令，而是通过控制是否给元素的 class 属性绑定属性值 hidden 来实现。</p><pre id="8e43f92e-0184-4be6-b2eb-e1c3cd2ba63a" class="code"><code>&lt;div x-data=&quot;{ open: false }&quot;&gt;
+    &lt;button x-on:click=&quot;open = !open&quot;&gt;下拉切换按钮&lt;/button&gt;
+ 
+    &lt;div :class=&quot;open ? &#x27;&#x27; : &#x27;hidden&#x27;&quot;&gt;
+        下拉组件内容...
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre><p id="b7be728a-d378-400f-9fd8-3d5b6f228f7d" class="">现在，当<code><strong>open</strong></code>变为<code><strong>false</strong></code>时，元素的 class 属性将绑定上 hidden。</p><h1 id="93356ba3-9494-4dfd-902f-182092ec48c1" class="">class 属性的短路表达式</h1><hr id="612563a6-3a42-42e3-bf67-98b70475bead"/><p id="8c39fbe5-c131-4122-8d67-340bf92e9c21" class="">如果你觉得 JavaScript 三元表达式的写法过于冗长，你也可以使用 JavaScript 的短路表达式。下面的示例展示了这种写法：</p><pre id="4e03a16a-e3f4-490e-a9e3-63d96d13e555" class="code"><code>&lt;div :class=&quot;show ? &#x27;&#x27; : &#x27;hidden&#x27;&quot;&gt;
+&lt;!-- 等同于： --&gt;
+&lt;div :class=&quot;show || &#x27;hidden&#x27;&quot;&gt;</code></pre><p id="597c215a-eae8-4d58-a75c-31183ad22ea5" class="">你也可以使用相反的结果。比如我们不使用<code><strong>open</strong></code>来控制，而是使用具有相反值的变量：<code><strong>closed</strong></code>。</p><pre id="ff8d09cc-d852-4597-bf2e-7f1e1aa0c21f" class="code"><code>&lt;div :class=&quot;closed ? &#x27;hidden&#x27; : &#x27;&#x27;&quot;&gt;
+&lt;!-- 等同于： --&gt;
+&lt;div :class=&quot;closed &amp;&amp; &#x27;hidden&#x27;&quot;&gt;</code></pre><p id="b3de53c7-2780-42f7-9be5-fc0f5e034078" class="">在一些流行的 JavaScript 代码风格规范中，都推荐使用短路表达式来替代非必要的三元表达式。</p><h1 id="79af9cfe-eb64-4cba-af30-c6a394cfa572" class="">class 属性的实体语法</h1><hr id="461d2a53-24a8-4a5e-bc63-3ccc9546bd59"/><p id="6258ecb6-d9f1-4bb9-9412-caddb7525e64" class="">Alpine 还提供了一个额外的语法来控制 class 属性的属性值。通过给其传递一个 JavaScript 实体来控制，这个 JavaScript 实体内的数据只有一对键值对，使用这个实体更应该被叫做映射，其中映射的键为 class 属性名，映射的值为布尔值。例如：</p><pre id="4057d626-279f-490e-a88b-62ce297a04d5" class="code"><code>&lt;div :class=&quot;{ &#x27;hidden&#x27;: !show }&quot;&gt;</code></pre><p id="2f6d3eb0-07e8-41fb-b3ad-0ebf837a58dc" class="">实体语法和之前的表达式语法不同，使用实体语法时，Alpine 不会保留元素原本 class 属性的同名属性值。例如：</p><pre id="360b0bf2-15a1-4313-81a4-b0d972aab7b9" class="code"><code>&lt;div x-data=&quot;{ isHidden: false }&quot;&gt;
+    &lt;div class=&quot;hidden&quot; :class=&quot;{ &#x27;hidden&#x27;: isHidden }&quot;&gt;我的 hidden 属性值将被移除&lt;/div&gt;
+    &lt;div class=&quot;hidden&quot; :class=&quot;isHidden &amp;&amp; &#x27;hidden&#x27;&quot;&gt;我的 hidden 属性值仍然保留&lt;/div&gt;
+&lt;/div&gt;</code></pre><p id="c38043d8-960b-46b2-83d8-e63b82ee703f" class="">如果你仍然不太理解，接下来让我们深入研究 Alpine 是如何以不同于其他属性的方式处理<code><strong>x-bind:class</strong></code>。</p><h1 id="a1a67b2c-aeb7-44bf-9431-0b42fe67f90b" class=""><strong>x-bind:class 的特殊行为</strong></h1><hr id="013acd2a-29dc-4b7a-92fa-f36848115616"/><p id="83cc9f65-7329-4b3f-b29a-d798ed9025e6" class=""><code><strong>x-bind</strong></code>绑定到 class 属性的行为和绑定其他属性的行为有一些不同。</p><p id="9778b47b-4c6e-4b44-9456-c9bcd16e8dde" class="">例如以下情况。</p><pre id="4b92fc0c-850e-4abb-bd8b-178b72bae2b0" class="code"><code>&lt;div class=&quot;opacity-50&quot; :class=&quot;hide &amp;&amp; &#x27;hidden&#x27;&quot;&gt;
+&lt;div id=&quot;opacity-50&quot; :id=&quot;hide &amp;&amp; &#x27;hidden&#x27;&quot;&gt;</code></pre><p id="09507450-eeaf-486a-bdfc-859e8ce5fc46" class="">如果<code><strong>hide</strong></code>为true，对于绑定到 class 的情况，上面的示例会将 hidden 属性值附加到 class 中，而对于绑定到其他属性的情况，例如 id ，示例的 hidden 属性值将会覆盖原本的属性值 opacity-50 。最终结果将会是这样：</p><pre id="f4fe0b4b-bd4e-45f5-aeca-672e785181e9" class="code"><code>&lt;div class=&quot;opacity-50 hidden&quot;&gt;
+&lt;div id=&quot;hidden&quot;&gt;</code></pre><p id="d929c69f-6ab8-4e34-b93d-a5ae4100788c" class="">这种行为看上去是十分符合逻辑的，因为 class 属性本就应该支持接受多个属性值来复合多种样式，使用这种特殊行为能更好的满足需求。</p><h1 id="426404ca-6495-4740-b6f7-fd9a7e829d24" class="">绑定到 style 属性</h1><hr id="2edf2cda-30e6-478c-8cc8-2634b02bdaba"/><p id="c804f3e3-5b2e-4409-8208-c7b45d7dde81" class="">与 class 属性的实体语法类似，Alpine 也提供了一种实体语法来将属性值绑定到 style 属性上。</p><pre id="0db4a988-644e-496a-b8a6-4411dc415442" class="code"><code>&lt;div :style=&quot;{ color: &#x27;red&#x27;, display: &#x27;flex&#x27; }&quot;&gt;
+ 
+&lt;!-- 渲染为: --&gt;
+&lt;div style=&quot;color: red; display: flex;&quot; ...&gt;</code></pre><p id="03b53b2d-8f2f-4821-83d0-02e2891768e7" class="">你同样可以使用三元表达式和短路表达式。</p><pre id="e9b2c90a-dad7-4ef3-98d8-3e5844083bb0" class="code"><code>&lt;div x-bind:style=&quot;true ? { color: &#x27;red&#x27; } : {}&quot;&gt;
+&lt;div x-bind:style=&quot;true &amp;&amp; { color: &#x27;red&#x27; }&quot;&gt;
+ 
+&lt;!-- 渲染为: --&gt;
+&lt;div style=&quot;color: red;&quot;&gt;</code></pre><p id="cc6b796d-fde4-4a81-8ffb-1685e26fe2bd" class="">使用实体语法的优点是能将其与元素上的现有样式混合在一起：</p><pre id="27413bf1-f9f0-4890-bb51-83ad9db51db0" class="code"><code>&lt;div style=&quot;padding: 1rem;&quot; :style=&quot;{ color: &#x27;red&#x27;, display: &#x27;flex&#x27; }&quot;&gt;
+ 
+&lt;!-- 渲染为: --&gt;
+&lt;div style=&quot;padding: 1rem; color: red; display: flex;&quot; ...&gt;</code></pre><p id="acb7bfbd-79bb-4bde-a9b1-6ce64d7fa854" class="">同 Alpine 中的其他指令一样，你也可以使用<code><strong>x-data</strong></code>中的数据来作为实体：</p><pre id="c1f2a865-d53d-4341-a614-3989549ca127" class="code"><code>&lt;div x-data=&quot;{ styles: { color: &#x27;red&#x27;, display: &#x27;flex&#x27; }}&quot;&gt;
+    &lt;div :style=&quot;styles&quot;&gt;
+&lt;/div&gt;
+ 
+&lt;!-- 渲染为: --&gt;
+&lt;div ...&gt;
+    &lt;div style=&quot;color: red; display: flex;&quot; ...&gt;
+&lt;/div&gt;</code></pre><h1 id="1912d283-af0f-42a4-a452-3a578b382340" class="">绑定 Alpine 指令</h1><hr id="1a63a92a-7a44-44e5-bcf8-67d50d791144"/><p id="23d8bf6b-7664-4f8a-bae6-07987577e166" class=""><code><strong>x-bind</strong></code>也可以将具有不同指令和属性的实体绑定到元素。</p><pre id="95ef8770-29ef-4ff8-a283-30899b40e5fe" class="code"><code>&lt;div x-data=&quot;dropdown()&quot;&gt;
+    &lt;button x-bind=&quot;trigger&quot;&gt;打开下拉组件&lt;/button&gt;
+ 
+    &lt;span x-bind=&quot;dialogue&quot;&gt;下拉组件内容&lt;/span&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+    document.addEventListener(&#x27;alpine:init&#x27;, () =&gt; {
+        Alpine.data(&#x27;dropdown&#x27;, () =&gt; ({
+            open: false,
+ 
+            trigger: {
+                [&#x27;x-ref&#x27;]: &#x27;trigger&#x27;,
+                [&#x27;@click&#x27;]() {
+                    this.open = true
+                },
+            },
+ 
+            dialogue: {
+                [&#x27;x-show&#x27;]() {
+                    return this.open
+                },
+                [&#x27;@click.outside&#x27;]() {
+                    this.open = false
+                },
+            },
+        }))
+    })
+&lt;/script&gt;</code></pre><p id="eb4c56ed-8fc6-4a16-aea3-2f4bb3c111c5" class="">对于<code><strong>x-bind</strong></code>的这种用法需要注意的是：</p><blockquote id="0e481531-327f-4df4-b6df-e0409181a988" class="">当被绑定的指令是<code><strong>x-for</strong></code>时，你应该从回调中返回一个表达式字符串。例如：<code><strong>[&#x27;x-for&#x27;]() { return &#x27;item in items&#x27; }</strong></code></blockquote></div></article></body></html>

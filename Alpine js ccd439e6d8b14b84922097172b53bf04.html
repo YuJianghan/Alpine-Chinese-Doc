@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Alpine.js</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ccd439e6-d8b1-4b84-9220-97172b53bf04" class="page sans"><header><img class="page-cover-image" src="https://alpinejs.dev/alpine_long.svg" style="object-position:center 86.27%"/><h1 class="page-title">Alpine.js</h1></header><div class="page-body"><hr id="41b33db0-9fe4-480a-a433-29d4e8daac0c"/><p id="4caa28f9-ed21-4b32-af1a-b09eebcdd030" class="">本文是 Alpine.js 官方文档的拙劣翻译，因为在学习时并没有找到 Alpine 3 的中文文档，所以在配合机翻学习 Alpine.js 时顺带做了一下翻译。</p><p id="0a080f4c-762f-481b-b96d-6eea65480506" class="">如有纰漏，欢迎指正。</p><p id="33559a5e-139d-4648-819a-3d755954cc4f" class="">官方文档：</p><figure id="41e60ccf-2361-471b-9bc6-dfa120099dc9"><a href="https://alpinejs.dev/start-here" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Start Here — Alpine.js</div></div><div class="bookmark-href"><img src="https://alpinejs.dev/favicon.png" class="icon bookmark-icon"/>https://alpinejs.dev/start-here</div></div></a></figure><h1 id="105dfc9b-2dd0-448b-8c28-4050b247a389" class="">安装</h1><hr id="0a148885-5def-4256-9d73-afa9791237bd"/><figure id="72256809-5e14-4c0d-85da-5506f186bb2d" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%AE%89%E8%A3%85%20722568095e144c0d85da5506f186bb2d.html">安装</a></figure><h1 id="9babcc72-6ec5-4900-9e75-76e723075f41" class="">指令</h1><hr id="117bf91e-de03-4c05-afe2-64b6de10aa0a"/><p id="bd497fb7-3d6c-4829-8d75-00d5dce40367" class="">指令为 Alpine 为 HTML 标签定义的特殊的属性。</p><figure id="0ebab516-29c9-43f6-8a0f-d1f25e0c37d2" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%95%B0%E6%8D%AE%20x-data%200ebab51629c943f68a0fd1f25e0c37d2.html">数据: x-data</a></figure><figure id="eb4378e7-f44f-4c99-b1f3-c3727f4d45d5" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%88%9D%E5%A7%8B%E5%8C%96%20x-init%20eb4378e7f44f4c99b1f3c3727f4d45d5.html">初始化: x-init</a></figure><figure id="852d0974-df4e-4fb7-b0d8-12e6df8dc4ca" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%98%BE%E7%A4%BA%20x-show%20852d0974df4e4fb7b0d812e6df8dc4ca.html">显示: x-show</a></figure><figure id="6e9ad8b7-f4ec-46b4-a6f7-0cd0a0a72f43" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%BB%91%E5%AE%9A%20x-bind%206e9ad8b7f4ec46b4a6f70cd0a0a72f43.html">绑定: x-bind</a></figure><figure id="d53a0d61-b4d6-44bc-a702-47cf6d5e135f" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%9B%91%E5%90%AC%20x-on%20d53a0d61b4d644bca70247cf6d5e135f.html">监听: x-on</a></figure><figure id="1aa81929-5953-456a-8431-9ecbfe26f8d7" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%96%87%E6%9C%AC%20x-text%201aa819295953456a84319ecbfe26f8d7.html">文本: x-text</a></figure><figure id="41adf05c-1f28-40f5-869f-2a656207fcd9" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E8%B6%85%E6%96%87%E6%9C%AC%20x-html%2041adf05c1f2840f5869f2a656207fcd9.html">超文本: x-html</a></figure><figure id="9672f919-b6cd-45b1-af0d-4db9a3a2276f" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%20x-model%209672f919b6cd45b1af0d4db9a3a2276f.html">双向绑定: x-model</a></figure><figure id="fb959d59-133c-427a-ac46-91c60bb1debf" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%8F%AF%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%20x-modelable%20fb959d59133c427aac4691c60bb1debf.html">可双向绑定: x-modelable</a></figure><figure id="a0bf2dd9-c90a-4965-a1b7-48d72811ca71" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E9%81%8D%E5%8E%86%20x-for%20a0bf2dd9c90a4965a1b748d72811ca71.html">遍历: x-for</a></figure><figure id="0863fca2-c496-49a4-bfff-d43ee954042f" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E8%BF%87%E6%B8%A1%20x-transition%200863fca2c49649a4bfffd43ee954042f.html">过渡: x-transition</a></figure><figure id="f0e97d1a-60f6-4099-a0c8-cd6592b6be08" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%BD%B1%E5%93%8D%20x-effect%20f0e97d1a60f64099a0c8cd6592b6be08.html">影响: x-effect</a></figure><figure id="e19b1841-af23-4ecd-bcc5-4f46484f8698" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%BF%BD%E7%95%A5%20x-ignore%20e19b1841af234ecdbcc54f46484f8698.html">忽略: x-ignore</a></figure><figure id="0539997b-5eed-4f6c-a960-2ca76d684c1e" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%8F%82%E7%85%A7%20x-ref%200539997b5eed4f6ca9602ca76d684c1e.html">参照: x-ref</a></figure><figure id="936381c8-7768-4cef-9542-26d064212828" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E9%9A%90%E8%BA%AB%E8%A1%A3%20x-cloak%20936381c877684cef954226d064212828.html">隐身衣: x-cloak</a></figure><figure id="9e43be43-325c-47dc-a78f-eb989b082e35" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E4%BC%A0%E8%BE%93%20x-teleport%209e43be43325c47dca78feb989b082e35.html">传输: x-teleport</a></figure><figure id="a77602c3-5bdc-4d45-96cb-5b542b31c5df" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%88%A4%E6%96%AD%20x-if%20a77602c35bdc4d4596cb5b542b31c5df.html">判断: x-if</a></figure><figure id="5af9dd8f-2a4d-4356-85e5-44bb817cd9a9" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%BC%96%E5%8F%B7%20x-id%205af9dd8f2a4d435685e544bb817cd9a9.html">编号: x-id</a></figure><h1 id="cd10fe24-df79-4925-8e01-dc0e40b1d0af" class="">魔法</h1><hr id="2db7fa74-af90-49fc-b2fb-b65ca6f34413"/><figure id="4fc52ed6-2712-4c74-b064-8a41ea47b234" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E8%87%AA%E8%BA%AB%20$el%204fc52ed627124c74b0648a41ea47b234.html">自身: $el</a></figure><figure id="aecef580-2797-4ad6-9136-f1a67481c6a4" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E9%80%89%E6%8B%A9%20$refs%20aecef58027974ad69136f1a67481c6a4.html">选择: $refs</a></figure><figure id="0dabf63a-2fd1-4416-866f-b4cc77aab0bc" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%85%A8%E5%B1%80%20$store%200dabf63a2fd14416866fb4cc77aab0bc.html">全局: $store</a></figure><figure id="753f5cf4-80d4-4001-9235-e7185bf30183" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%9B%91%E8%A7%86%20$watch%20753f5cf480d440019235e7185bf30183.html">监视: $watch</a></figure><figure id="2dd2487c-34f3-4a6d-95a1-68c3d09f7665" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%88%86%E6%B4%BE%20$dispatch%202dd2487c34f34a6d95a168c3d09f7665.html">分派: $dispatch</a></figure><figure id="0cf3d9eb-4bd1-42a3-8e92-d7004b8b6ef0" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%90%8E%E7%BB%AD%20$nextTick%200cf3d9eb4bd142a38e92d7004b8b6ef0.html">后续: $nextTick</a></figure><figure id="2fb70fcd-4092-459e-a35a-754fe9f62679" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%A0%B9%20$root%202fb70fcd4092459ea35a754fe9f62679.html">根: $root</a></figure><figure id="5641f36e-81ed-46e4-a589-b6acc12dcbfa" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%95%B0%E6%8D%AE%20$data%205641f36e81ed46e4a589b6acc12dcbfa.html">数据: $data</a></figure><figure id="10a02d55-df6c-4e88-bda2-161d4f2da997" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%BC%96%E5%8F%B7%20$id%2010a02d55df6c4e88bda2161d4f2da997.html">编号: $id</a></figure><h1 id="9d79f757-4b3f-4054-9c3b-e996efc7d2f0" class="">全局</h1><hr id="3906fd0c-9b8e-4db1-bb34-e3189f48b3fe"/><figure id="465da350-9c05-4afb-878d-ade2d27617da" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E6%95%B0%E6%8D%AE%20Alpine%20data%20465da3509c054afb878dade2d27617da.html">数据: Alpine.data</a></figure><figure id="8123650a-5281-4de7-8e79-2cb46424dc0a" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E5%85%A8%E5%B1%80%20Alpine%20store%208123650a52814de78e792cb46424dc0a.html">全局: Alpine.store</a></figure><figure id="dc4513e3-6241-4105-bea1-9f878cb0d9d5" class="link-to-page"><a href="Alpine%20js%20ccd439e6d8b14b84922097172b53bf04/%E7%BB%91%E5%AE%9A%20Alpine%20bind%20dc4513e362414105bea19f878cb0d9d5.html">绑定: Alpine.bind</a></figure></div></article></body></html>

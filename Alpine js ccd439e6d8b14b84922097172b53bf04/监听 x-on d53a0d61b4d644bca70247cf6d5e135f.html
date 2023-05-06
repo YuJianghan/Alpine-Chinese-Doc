@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>监听: x-on</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d53a0d61-b4d6-44bc-a702-47cf6d5e135f" class="page sans"><header><h1 class="page-title">监听: x-on</h1></header><div class="page-body"><hr id="0bd106a2-303a-4945-91ce-f31efaa33d36"/><p id="5198482c-2432-4909-aa1c-52732dfe849b" class="">使用<code><strong>x-on</strong></code>监听 DOM 事件并执行对应的代码。</p><p id="6b6b7050-2849-493a-af07-c410ca3b8443" class="">下面是一个简单的按钮的例子，点击时会出现一个弹窗。</p><pre id="ce756580-6647-4d9c-bdde-c7a4e9b0c7dd" class="code"><code>&lt;button x-on:click=&quot;alert(&#x27;你好，世界！&#x27;)&quot;&gt;打招呼&lt;/button&gt;</code></pre><blockquote id="59dece1e-866f-49a3-a2b8-089aaaae2083" class=""><code><strong>x-on</strong></code>只能监听小写的事件，因为 HTML 属性不区分大小写。如果使用<code><strong>x-on:CLICK</strong></code>将只会监听名为<code><strong>click</strong></code>的事件。如果你需要监听一个名称为驼峰名称法的自定义事件，你可以使用<code><strong>.camel</strong></code>来解决这个问题。或者你也可以使用<code><strong>x-bind</strong></code>绑定 JavaScript 代码中定义的<code><strong>x-on</strong></code>指令，这样大小写将被保留。</blockquote><h1 id="3546e184-e187-4c21-87f7-27f9f8925313" class="">简写语法</h1><hr id="9af4c9ee-7dd4-4557-b94a-876e09c69119"/><p id="ccae292f-9074-46c9-a641-baeae27da071" class="">如果你觉得<code><strong>x-on:</strong></code>这种写法过于冗长，也可以使用简写语法：<code><strong>@</strong></code>。</p><p id="d488f8f2-9b7e-40af-9db6-3148e8f54ed6" class="">下面的组件与上面相同，但使用了简写语法：</p><pre id="1ac44e37-53de-41e6-b663-57bf410a0475" class="code"><code>&lt;button @click=&quot;alert(&#x27;你好，世界！&#x27;)&quot;&gt;打招呼&lt;/button&gt;</code></pre><h1 id="0b3440e1-0bce-4650-9dfb-684fa05ddf57" class="">原生事件</h1><hr id="4e8d41a3-e6ac-4297-a114-66f99c8ea5d4"/><p id="2d55edaf-4a88-4d89-b088-0158b13585b0" class="">如果希望监听能调用 JavaScript 的原生事件，可以使用 Alpine 的魔法<code><strong>$event</strong></code>。</p><pre id="ba067422-3f27-4f62-8486-75bdd7fbbe6f" class="code"><code>&lt;button @click=&quot;alert($event.target.getAttribute(&#x27;message&#x27;))&quot; message=&quot;&#x27;你好，世界！&quot;&gt;打招呼&lt;/button&gt;</code></pre><p id="877ffce1-07cd-4ed9-afc6-84711096f075" class="">此外，Alpine 还能将发生事件的元素传递给其引用的方法，而不用带尾随括号。例如：</p><pre id="42a25927-559b-4876-b06e-ba17de652e97" class="code"><code>&lt;button @click=&quot;handleClick&quot;&gt;...&lt;/button&gt;
+ 
+&lt;script&gt;
+    function handleClick(e) {
+        // 现在你可以直接访问发生事件的元素: e
+    }
+&lt;/script&gt;</code></pre><h1 id="6b4d32ec-eb96-4ae7-a4c1-ae760dde0bc9" class="">键盘事件</h1><hr id="ca5237da-22ea-4b90-a479-c2f4242e5067"/><p id="5850e14d-30c8-4334-b690-0e21939bf838" class="">Alpine 可以监听特定键上的<code><strong>keydown</strong></code>和<code><strong>keyup</strong></code>事件。</p><p id="7e403c7f-86cf-4b83-a54e-ab726664471e" class="">下面是一个监听 input 元素中输入<code><strong>Enter</strong></code>键的例子。</p><pre id="38dd0d4d-a49e-44f5-aa63-4bf276411c97" class="code"><code>&lt;input type=&quot;text&quot; @keyup.enter=&quot;alert(&#x27;已提交！&#x27;)&quot;&gt;</code></pre><p id="d2d8b1ce-5147-48ed-a813-1a916a93fadf" class="">你可以链式调用这些键修饰符来实现更复杂的键盘监听器。</p><p id="52961d2e-117d-436f-b9a6-001d495beb97" class="">下面是一个 input 元素的监听器，它在按住<code><strong>Shift</strong></code>键并按下<code><strong>Enter</strong></code>键时运行，但在单独按下<code><strong>Enter</strong></code>键时不运行。</p><pre id="3d72f75c-81be-45a3-b39e-e2fac0f2e405" class="code"><code>&lt;input type=&quot;text&quot; @keyup.shift.enter=&quot;alert(&#x27;已提交！&#x27;)&quot;&gt;</code></pre><p id="e80bebcf-bce8-4e7f-b30f-a10af2b8234c" class="">你可以直接使用浏览器键盘事件的键值作为键修饰符。需要注意的是，修饰符需要使用连字符命名法的形式。</p><pre id="ad09bf35-116e-4c09-897e-7019b15a9125" class="code"><code>&lt;input type=&quot;text&quot; @keyup.page-down=&quot;alert(&#x27;已提交！&#x27;)&quot;&gt;</code></pre><p id="30899337-1612-4d01-95b7-a3c04878b358" class="">为了便于参考，这里列出了一些你可能想监听的常用键。</p><table id="f138e306-11b3-4274-9576-74a17a765206" class="simple-table"><thead class="simple-table-header"><tr id="a27a6855-008c-4f40-a43c-854dfa3363ca"><th id="tkK&lt;" class="simple-table-header-color simple-table-header" style="width:349px"><strong>修饰符</strong></th><th id="D:i^" class="simple-table-header-color simple-table-header" style="width:349px"><strong>键盘按键</strong></th></tr></thead><tbody><tr id="0ae1c477-5e8d-43fb-8472-cddd963f029a"><td id="tkK&lt;" class="" style="width:349px"><code>.shift</code></td><td id="D:i^" class="" style="width:349px">Shift</td></tr><tr id="bd66f618-5d5e-42a4-8bb2-e1ee1e5a60ef"><td id="tkK&lt;" class="" style="width:349px"><code>.enter</code></td><td id="D:i^" class="" style="width:349px">Enter</td></tr><tr id="0529e8bb-4a18-457c-9df7-3085c95f71f2"><td id="tkK&lt;" class="" style="width:349px"><code>.space</code></td><td id="D:i^" class="" style="width:349px">Space</td></tr><tr id="4d5f958b-5467-4a68-bfe7-4acb96cffe16"><td id="tkK&lt;" class="" style="width:349px"><code>.ctrl</code></td><td id="D:i^" class="" style="width:349px">Ctrl</td></tr><tr id="8d0595a3-ab24-4a5e-ba39-4465ad55f733"><td id="tkK&lt;" class="" style="width:349px"><code>.cmd</code></td><td id="D:i^" class="" style="width:349px">Cmd</td></tr><tr id="520c5188-fa35-4062-a9d7-f429b6c66484"><td id="tkK&lt;" class="" style="width:349px"><code>.meta</code></td><td id="D:i^" class="" style="width:349px">Mac 上的 Cmd 键, Windows 上的 Win 键</td></tr><tr id="aae91089-fbb1-4200-ac1c-379e257af54d"><td id="tkK&lt;" class="" style="width:349px"><code>.alt</code></td><td id="D:i^" class="" style="width:349px">Alt</td></tr><tr id="ea74e790-ca29-47b8-b67c-31928ef6e9c6"><td id="tkK&lt;" class="" style="width:349px"><code>.up</code> <code>.down</code> <code>.left</code> <code>.right</code></td><td id="D:i^" class="" style="width:349px">上/下/左/右 方向键</td></tr><tr id="ca1b2c8d-0d36-44f7-8175-73ee171c0127"><td id="tkK&lt;" class="" style="width:349px"><code>.escape</code></td><td id="D:i^" class="" style="width:349px">Esc</td></tr><tr id="cb26a628-8947-4d5c-b602-8867027e53c6"><td id="tkK&lt;" class="" style="width:349px"><code>.tab</code></td><td id="D:i^" class="" style="width:349px">Tab</td></tr><tr id="ce921d81-78b9-4a72-af62-d59ae3571ed0"><td id="tkK&lt;" class="" style="width:349px"><code>.caps-lock</code></td><td id="D:i^" class="" style="width:349px">Caps Lock</td></tr><tr id="908ad245-f476-4562-a9ee-a2f22df952f4"><td id="tkK&lt;" class="" style="width:349px"><code>.equal</code></td><td id="D:i^" class="" style="width:349px">等于号, <code>=</code></td></tr><tr id="6060abe1-a7a3-45da-9ffb-d414ae5ead58"><td id="tkK&lt;" class="" style="width:349px"><code>.period</code></td><td id="D:i^" class="" style="width:349px">英文句号, <code>.</code>键</td></tr><tr id="d5af50e9-266b-445b-8989-5b7e482447c2"><td id="tkK&lt;" class="" style="width:349px"><code>.slash</code></td><td id="D:i^" class="" style="width:349px">正斜杠, <code>/</code>键</td></tr></tbody></table><h1 id="2abf9e38-4854-46fb-96cf-e3897e55b5b2" class="">自定义事件</h1><hr id="90de660a-7a69-44a2-bba4-3a53e02a93d7"/><p id="eabc43e5-6650-44cf-a114-c066f995bf8a" class="">Alpine 的监听器也能调用自定义事件。</p><p id="b92fd17e-84bd-4376-8f0a-bd8bcb934157" class="">下面是一个组件的示例，它监听按钮的点击事件并调用自定义事件。</p><pre id="4afce932-77f8-4865-85cf-4a170f3906d5" class="code"><code>&lt;div x-data @foo=&quot;alert(&#x27;按钮被点击了！&#x27;)&quot;&gt;
+    &lt;button @click=&quot;$event.target.dispatchEvent(new CustomEvent(&#x27;foo&#x27;, { bubbles: true }))&quot;&gt;...&lt;/button&gt;
+&lt;/div&gt;</code></pre><p id="85baf84c-d4e0-43e1-a61c-edb9e0579773" class="">单击按钮时，将调用<code><strong>@foo</strong></code>监听事件。</p><p id="86107521-fef7-4aea-ad28-ba382eb732c4" class="">因为<code><strong>.dispatchEvent</strong></code> API很冗长，Alpine 提供了<code><strong>$dispatch</strong></code> 魔法来简化。</p><p id="1e758d88-0cc2-4c68-93fe-c4fdfbaec066" class="">下面是使用<code><strong>$dispatch</strong></code> 魔法重写的相同的组件。</p><pre id="b4f9d40e-4827-4c03-815f-8d897950661c" class="code"><code>&lt;div x-data @foo=&quot;alert(&#x27;按钮被点击了！&#x27;)&quot;&gt;
+    &lt;button @click=&quot;$dispatch(&#x27;foo&#x27;)&quot;&gt;...&lt;/button&gt;
+&lt;/div&gt;</code></pre><h1 id="96fcea8f-ab0c-413d-8ede-9d71a9265193" class="">修饰符</h1><hr id="977d7ff5-b2c5-4475-94af-5c91ed4f090a"/><p id="4dbcb615-64e8-4112-94d5-5e04824fa2fe" class="">Alpine 提供了许多指令修饰符来自定义监听器的行为。</p><h2 id="25a760fd-e19e-413b-8a6f-5b78c8636700" class="">.prevent</h2><h2 id="5bf58406-8ac0-443d-a914-192be2a8c6a6" class="">.stop</h2><h2 id="2766a25e-6667-443e-964e-c8ed210e94be" class="">.outside</h2><h2 id="6b059420-d443-47b5-a046-3f2570a1d121" class="">.window</h2><h2 id="b5af1707-210d-495b-9daa-f528711225b5" class="">.document</h2><h2 id="0e94ae87-7fac-4b42-bd46-7f19e455475d" class="">.once</h2><h2 id="71c9c811-5221-4e12-93eb-6be81c13fcde" class="">.debounce</h2><h2 id="6a356b6e-c679-4305-9107-9ac2e68fc25d" class="">.throttle</h2><p id="5f179296-b63d-42c3-a047-f1a681fc8fce" class=""><code><strong>.throttle</strong></code>修饰符类似于<code><strong>.debounce</strong></code>，但在你连续更改数据时不会无限期的延迟它的更新，而是会在每经过指定的时间就执行一次更新，默认的节流时间也是250毫秒。</p><p id="9142a651-dac1-42f9-ba3f-2e1ff7e24102" class="">这对于一些可能需要长时间连续触发更改的情况非常有用，因为如果使用<code><strong>.debounce</strong></code>修饰符，更改将不起作用，而你希望能经常处理数据的更改。</p><p id="7f08d997-85a6-4b9b-9318-3c5bff402218" class="">例如：</p><pre id="4e285178-9071-490f-863a-099a63e97921" class="code"><code>&lt;div @scroll.window.throttle=&quot;handleScroll&quot;&gt;...&lt;/div&gt;</code></pre><p id="5cdff755-37c9-4a6f-ade2-724ac5d28996" class="">上面的示例是一个很好的节流的示例。如果没有<code><strong>.throttle</strong></code>，当用户向下滚动页面时，<code><strong>handleScroll</strong></code>方法将被触发数百次，这会减慢一个网站的速度。而通过添加<code><strong>.throttle</strong></code>，我们确保<code><strong>handleScroll</strong></code>每250毫秒才被调用一次。</p><blockquote id="84ee3d96-4639-4b7d-ab8b-7a413f055868" class="">有趣的事实：这个文档站点上使用了这种策略来更新右侧边栏中当前突出显示的部分。</blockquote><p id="b83a172d-83e8-40bf-9fe0-5ea84c8420e0" class="">就像使用<code><strong>.debounce</strong></code>一样，你可以为节流添加时间修饰符来自定义节流时间：</p><pre id="0d09dc9a-d0ec-400d-8c02-bccfbbce9f4e" class="code"><code>&lt;div @scroll.window.throttle.750ms=&quot;handleScroll&quot;&gt;...&lt;/div&gt;</code></pre><p id="1182fd57-c3d1-456c-bc67-ca4b7b8c9da6" class="">现在，<code><strong>handleScroll</strong></code>将每750毫秒被调用一次。</p><h2 id="067aed0e-9da0-4e02-aa0f-f8dfd9ec4de5" class="">.self</h2><h2 id="ec813e32-a8ae-4ec3-9e65-f98afe86320b" class="">.camel</h2><h2 id="3450be59-88c7-44cb-976d-3ec6a68dc77e" class="">.dot</h2><h2 id="3baf8a32-3698-402d-ae8e-c33f412d5a42" class="">.passive</h2><h2 id="01d24c55-9b14-4bf5-b74f-e9b4c008f9f0" class="">.capture</h2></div></article></body></html>

@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>过渡: x-transition</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0863fca2-c496-49a4-bfff-d43ee954042f" class="page sans"><header><h1 class="page-title">过渡: x-transition</h1></header><div class="page-body"><hr id="604643e0-f069-4570-926c-16794aec4cfc"/><p id="4a4f9d13-0732-4158-bcb5-610774334bfd" class="">Alpine 提供了一个开箱即用的创建过渡的指令。使用<code><strong>x-transition</strong></code>指令，你可以在元素的显示或隐藏之间创建平滑的过渡。</p><p id="b079266a-cbe3-4d4c-ba53-c9eff7fbea42" class="">在 Alpine 中处理过渡有两种主要的方法：</p><ul id="eef37d20-0781-4a4c-a431-701b6e3e9d24" class="bulleted-list"><li style="list-style-type:disc"><strong>过渡助手</strong></li></ul><ul id="e327e4aa-f382-4e64-ba9a-ec47a600323c" class="bulleted-list"><li style="list-style-type:disc"><strong>应用 CSS 类别</strong></li></ul><h1 id="19039cfa-3166-4536-b603-aab2035fd18f" class="">过渡助手</h1><hr id="79a19596-d040-4e7c-9d62-ee7e327317f0"/><p id="86d7be0a-4349-47de-8061-f6024b674bb5" class="">使用 Alpine 实现过渡最简单的方法是将<code><strong>x-transition</strong></code>添加到带有<code><strong>x-show</strong></code>的元素上。例如：</p><pre id="17c9052d-d3b6-490f-ac2b-39a09c255412" class="code"><code>&lt;div x-data=&quot;{ open: false }&quot;&gt;
+    &lt;button @click=&quot;open = ! open&quot;&gt;Toggle&lt;/button&gt;
+ 
+    &lt;span x-show=&quot;open&quot; x-transition&gt;
+        Hello 👋
+    &lt;/span&gt;
+&lt;/div&gt;</code></pre><p id="83e5e73d-a481-475f-b843-d541258d6f18" class="">正如你所看到的，默认情况下，<code><strong>x-transition</strong></code>使用不透明度和缩放的过渡来显示和隐藏元素。</p><p id="413874e1-a795-4f12-aeac-d5ff7871435b" class="">你可以使用附加到<code><strong>x-transition</strong></code>指令的修饰符来修改这些默认值。让我们来看看这些。</p><h2 id="9b2bab1d-69c9-403e-beda-8caf4f1af5de" class=""><strong><strong>自定义持续时间</strong></strong></h2><p id="0248229e-888b-47bf-97bc-2fa462702097" class="">默认情况下，过渡持续时间在进入时设置为150毫秒，离开时设置为75毫秒。</p><p id="bb0dff9a-a124-4053-9e03-ae50dfcd58c1" class="">你可以使用<code><strong>.duration</strong></code>修饰符修改过渡的持续时间：</p><pre id="f06c7f52-5d26-426b-9c1b-8e5aff84396e" class="code"><code>&lt;div ... x-transition.duration.500ms&gt;</code></pre><p id="19957ade-e5f2-4e3b-bc0b-6e02ce4a494f" class="">上面的<code><strong>&lt;div&gt;</strong></code>的过渡时间在进入时和离开时都是500毫秒。</p><p id="314a428f-4336-4402-ad7a-9a2e8e96082f" class="">如果你希望单独为进入和离开自定义过渡时间，你可以这样做：</p><pre id="d7058281-29b4-4f9e-a75d-498fa372905c" class="code"><code>&lt;div ...
+    x-transition:enter.duration.500ms
+    x-transition:leave.duration.400ms
+&gt;</code></pre><h2 id="1ccd9239-008e-47bf-ada9-7374d1cbcae2" class=""><strong><strong>自定义延迟</strong></strong></h2><p id="1f71262c-2a02-430d-80bd-fa1063b488b8" class="">你可以使用<code><strong>.delay</strong></code>修饰符延迟过渡，如下所示：</p><pre id="992bb125-ca82-4c2b-a928-efa9cb72f663" class="code"><code>&lt;div ... x-transition.delay.50ms&gt;</code></pre><p id="319a4676-d8d0-4412-b852-9ce1fc38b3a5" class="">上面的示例将使元素的进出延迟50毫秒执行。</p><h2 id="dc2c690c-fe92-4cca-a686-a00af2284eaf" class=""><strong><strong>自定义不透明度</strong></strong></h2><p id="8a7c2688-31fe-4f6f-affe-bf59079bd229" class="">默认情况下，Alpine 的<code><strong>x-transition</strong></code>使用不透明度和缩放过渡以实现“淡入淡出”效果。</p><p id="e693d84b-f6b0-4c23-9ea3-79991843949f" class="">如果只希望应用不透明度过渡（无缩放），可以使用<code><strong>.opacity</strong></code>修饰符完成：</p><pre id="a20dbd0d-7caf-49b1-9962-18994919fd4e" class="code"><code>&lt;div ... x-transition.opacity&gt;</code></pre><h2 id="7be353f9-32f1-443a-9db9-25a0ee3ad434" class=""><strong><strong>自定义比例</strong></strong></h2><p id="6fafd5b3-075e-4e8b-b53b-b2c49b23ba2b" class="">与<code><strong>.opacity</strong></code>修饰符类似，你可以将<code><strong>x-transition</strong></code>设置为仅缩放（不过渡不透明度），如下所示：</p><pre id="4fa23348-a04c-401c-8aa0-e7a14c35ce53" class="code"><code>&lt;div ... x-transition.scale&gt;</code></pre><p id="c817614b-3ea0-4cb1-9e56-a2cf75dbbb5a" class=""><code><strong>.scale</strong></code>修饰符还提供配置其比例值和原点值的功能：</p><pre id="edd65de9-1db9-4b6a-9c8f-9b82d6b16045" class="code"><code>&lt;div ... x-transition.scale.80&gt;</code></pre><p id="21d7ee3f-ee45-4c32-ad2b-63af4dd2e812" class="">上面的代码片段会把元素放大和缩小80%。</p><p id="8f6eb21c-d1fc-4eb7-9415-e2221c788666" class="">同样，你可以为单独为进入和离开自定义比例值，如下所示：</p><pre id="bb8d871f-ff5d-4b9c-908d-8c4a62f201c9" class="code"><code>&lt;div ...
+    x-transition:enter.scale.80
+    x-transition:leave.scale.90
+&gt;</code></pre><p id="f48f9cc0-a99a-4c14-bba3-8a060fa955e7" class="">如果要自定义缩放过渡的原点，可以使用<code><strong>.origin</strong></code>修饰符：</p><pre id="849d0df9-3ac1-48cd-9815-0a1f0f9efd13" class="code"><code>&lt;div ... x-transition.scale.origin.top&gt;</code></pre><p id="7cec3a9a-27f6-4e69-b55a-1c27cf1203ec" class="">现在，将使用元素的顶部作为原点（而不是默认情况下的中心）来应用比例缩放。</p><p id="581651ad-4ac0-46b5-b618-133688519232" class="">正如你可能已经猜到的那样，它可以定义为：<code><strong>top</strong></code>、<code><strong>bottom</strong></code>、<code><strong>left</strong></code>和<code><strong>right</strong></code>。</p><p id="4466a303-4748-4c55-aa0c-b3cec8a66895" class="">如果愿意，你还可以组合两个原点值。例如，如果希望缩放的原点位于“右上角”，则可以使用：<code><strong>.origin.top.right</strong></code>作为修饰符。</p><h1 id="f88a87a5-1903-400d-96ea-8e72080a1d4c" class="">应用 CSS 类别</h1><hr id="8bebc063-55fe-4627-be19-d44eb96ebc33"/><p id="ed53c9f0-4f70-41b0-a99e-dd52ffa909f4" class="">为了直接控制过渡中的确切内容，你可以在过渡的不同阶段应用 CSS 类别。</p><blockquote id="b63d4852-ea8a-463e-8301-cd00b5a5c535" class="">以下示例使用 TailwindCSS 实用程序类别。</blockquote><pre id="04748fe2-3de3-4bc4-82ae-2c8faab7737e" class="code"><code>&lt;script defer src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+
+&lt;div x-data=&quot;{ open: false }&quot;&gt;
+    &lt;button @click=&quot;open = ! open&quot;&gt;Toggle&lt;/button&gt;
+ 
+    &lt;div
+        x-show=&quot;open&quot;
+        x-transition:enter=&quot;transition ease-out duration-300&quot;
+        x-transition:enter-start=&quot;opacity-0 scale-90&quot;
+        x-transition:enter-end=&quot;opacity-100 scale-100&quot;
+        x-transition:leave=&quot;transition ease-in duration-300&quot;
+        x-transition:leave-start=&quot;opacity-100 scale-100&quot;
+        x-transition:leave-end=&quot;opacity-0 scale-90&quot;
+    &gt;你好 👋&lt;/div&gt;
+&lt;/div&gt;</code></pre><table id="cd17804d-1b36-44c7-9e56-64f394f744ad" class="simple-table"><thead class="simple-table-header"><tr id="2b4ea0fc-1524-4e3b-8b51-53d845a0f9cd"><th id="yBgD" class="simple-table-header-color simple-table-header" style="width:150.5px"><strong>指令</strong></th><th id="hHZ?" class="simple-table-header-color simple-table-header" style="width:509.5px"><strong>说明</strong></th></tr></thead><tbody><tr id="4264da97-68f1-4bf0-8be4-cfb16847dd7a"><td id="yBgD" class="" style="width:150.5px"><strong><code>:enter</code></strong></td><td id="hHZ?" class="" style="width:509.5px">在整个进入阶段应用。</td></tr><tr id="c6e8d43b-756e-43c4-ac98-3878ebb1ccb0"><td id="yBgD" class="" style="width:150.5px"><code><strong>:enter-start</strong></code></td><td id="hHZ?" class="" style="width:509.5px">在触发进入过渡之前添加，在元素进入后删除一帧。</td></tr><tr id="77e999f8-e9b0-4c01-bed3-a7af485510d6"><td id="yBgD" class="" style="width:150.5px"><code><strong>:enter-end</strong></code></td><td id="hHZ?" class="" style="width:509.5px">在元素进入后添加一帧（同时 <strong><code>enter-start</code></strong> 删除），在过渡/动画完成时删除。</td></tr><tr id="ba8c6197-cc48-43b0-9598-c2f7d1b47571"><td id="yBgD" class="" style="width:150.5px"><strong><code>:leave</code></strong></td><td id="hHZ?" class="" style="width:509.5px">在整个离开阶段应用。</td></tr><tr id="a6946632-37b0-4cdf-973a-ff5581966c69"><td id="yBgD" class="" style="width:150.5px"><code><strong>:leave-start</strong></code></td><td id="hHZ?" class="" style="width:509.5px">在触发离开过渡时立即添加，在一帧后删除。</td></tr><tr id="04679444-c807-4dc5-b429-41b5fddbc5f9"><td id="yBgD" class="" style="width:150.5px"><code><strong>:leave-end</strong></code></td><td id="hHZ?" class="" style="width:509.5px">在触发离开过渡后添加一帧（同时 <strong><code>leave-start</code></strong> 删除），在过渡/动画完成时删除。</td></tr></tbody></table><p id="45fdceaa-8e66-479a-b167-57ea0f6a0ecf" class="">
+</p></div></article></body></html>
